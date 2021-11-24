@@ -30,8 +30,7 @@ public class User implements UserDetails, Serializable {
 
     private String password;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    private Set<Role> authorities = new HashSet<>();
+    private String authorities = "USER";
 
     public User(String username, String password) {
         this.username = username;
@@ -71,8 +70,5 @@ public class User implements UserDetails, Serializable {
         return 0;
     }
 
-    public void addAuthority(Role authority) {
-        authorities.add(authority);
-    }
 
 }

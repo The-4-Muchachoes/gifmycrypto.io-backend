@@ -47,7 +47,6 @@ public class UserController {
                     );
 
             User user = (User) authenticate.getPrincipal();
-            System.out.println(user.getAuthorities().toString());
 
             return ResponseEntity.ok()
                     .header(

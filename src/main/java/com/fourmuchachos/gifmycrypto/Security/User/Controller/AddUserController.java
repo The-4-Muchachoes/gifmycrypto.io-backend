@@ -1,7 +1,6 @@
 package com.fourmuchachos.gifmycrypto.Security.User.Controller;
 
 import com.fourmuchachos.gifmycrypto.Security.User.DTO.LoginRequest;
-import com.fourmuchachos.gifmycrypto.Security.User.Entity.Role;
 import com.fourmuchachos.gifmycrypto.Security.User.Entity.User;
 import com.fourmuchachos.gifmycrypto.Security.User.Service.UserService;
 import lombok.Data;
@@ -17,12 +16,10 @@ public class AddUserController {
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
 
-    @PostMapping(path = "/api/public/user")
+    @PostMapping(path = "/api/new_user")
     private User addUser(@RequestBody LoginRequest request){
         User user = new User(request);
-        Role role1 = new Role(Role.User);
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-        user.addAuthority(role1);
         return userService.addUser(user);
     }
 
