@@ -1,6 +1,6 @@
 package com.fourmuchachos.gifmycrypto.Security.Config;
 
-import com.muchachos.cinemaxx.Security.User.Repo.UserRepo;
+import com.fourmuchachos.gifmycrypto.Security.User.Repo.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

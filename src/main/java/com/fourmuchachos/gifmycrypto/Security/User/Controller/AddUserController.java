@@ -1,9 +1,9 @@
 package com.fourmuchachos.gifmycrypto.Security.User.Controller;
 
-import com.muchachos.cinemaxx.Security.User.DTO.LoginRequest;
-import com.muchachos.cinemaxx.Security.User.Entity.Role;
-import com.muchachos.cinemaxx.Security.User.Entity.User;
-import com.muchachos.cinemaxx.Security.User.Service.UserService;
+import com.fourmuchachos.gifmycrypto.Security.User.DTO.LoginRequest;
+import com.fourmuchachos.gifmycrypto.Security.User.Entity.Role;
+import com.fourmuchachos.gifmycrypto.Security.User.Entity.User;
+import com.fourmuchachos.gifmycrypto.Security.User.Service.UserService;
 import lombok.Data;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;

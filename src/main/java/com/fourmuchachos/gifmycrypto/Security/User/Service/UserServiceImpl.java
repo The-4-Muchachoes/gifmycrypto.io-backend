@@ -1,7 +1,8 @@
 package com.fourmuchachos.gifmycrypto.Security.User.Service;
 
-import com.muchachos.cinemaxx.Security.User.Entity.User;
-import com.muchachos.cinemaxx.Security.User.Repo.UserRepo;
+import com.fourmuchachos.gifmycrypto.Security.User.Entity.User;
+import com.fourmuchachos.gifmycrypto.Security.User.Repo.UserRepo;
+
 import org.springframework.stereotype.Service;
 
 @Service

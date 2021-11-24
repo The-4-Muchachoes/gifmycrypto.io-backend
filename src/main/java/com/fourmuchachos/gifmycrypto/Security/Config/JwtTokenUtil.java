@@ -1,6 +1,6 @@
 package com.fourmuchachos.gifmycrypto.Security.Config;
 
-import com.muchachos.cinemaxx.Security.User.Entity.User;
+import com.fourmuchachos.gifmycrypto.Security.User.Entity.User;
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;

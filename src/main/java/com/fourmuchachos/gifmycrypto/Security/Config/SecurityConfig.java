@@ -1,7 +1,7 @@
 package com.fourmuchachos.gifmycrypto.Security.Config;
 
-import com.muchachos.cinemaxx.Security.User.Entity.Role;
-import com.muchachos.cinemaxx.Security.User.Repo.UserRepo;
+import com.fourmuchachos.gifmycrypto.Security.User.Entity.Role;
+import com.fourmuchachos.gifmycrypto.Security.User.Repo.UserRepo;
 import org.slf4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;

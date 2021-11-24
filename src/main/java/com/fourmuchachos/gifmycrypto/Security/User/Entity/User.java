@@ -1,6 +1,6 @@
 package com.fourmuchachos.gifmycrypto.Security.User.Entity;
 
-import com.muchachos.cinemaxx.Security.User.DTO.LoginRequest;
+import com.fourmuchachos.gifmycrypto.Security.User.DTO.LoginRequest;
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.springframework.security.core.userdetails.UserDetails;
