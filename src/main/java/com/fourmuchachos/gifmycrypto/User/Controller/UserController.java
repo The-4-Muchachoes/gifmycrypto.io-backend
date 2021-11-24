@@ -1,11 +1,11 @@
-package com.fourmuchachos.gifmycrypto.Security.User.Controller;
+package com.fourmuchachos.gifmycrypto.User.Controller;
 
 
-import com.fourmuchachos.gifmycrypto.Security.Config.JwtTokenUtil;
-import com.fourmuchachos.gifmycrypto.Security.User.DTO.LoginRequest;
-import com.fourmuchachos.gifmycrypto.Security.User.DTO.UserResponse;
-import com.fourmuchachos.gifmycrypto.Security.User.Entity.User;
-import com.fourmuchachos.gifmycrypto.Security.User.Service.UserService;
+import com.fourmuchachos.gifmycrypto.Config.Security.JwtTokenUtil;
+import com.fourmuchachos.gifmycrypto.User.DTO.LoginRequest;
+import com.fourmuchachos.gifmycrypto.User.DTO.UserResponse;
+import com.fourmuchachos.gifmycrypto.User.Entity.User;
+import com.fourmuchachos.gifmycrypto.User.Service.UserService;
 import io.swagger.annotations.Api;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpHeaders;

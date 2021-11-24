@@ -1,4 +1,4 @@
-package com.fourmuchachos.gifmycrypto.Security.User.DTO;
+package com.fourmuchachos.gifmycrypto.User.DTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

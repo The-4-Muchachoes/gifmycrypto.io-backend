@@ -1,6 +1,6 @@
-package com.fourmuchachos.gifmycrypto.Security.Config;
+package com.fourmuchachos.gifmycrypto.Config.Security;
 
-import com.fourmuchachos.gifmycrypto.Security.User.Repo.UserRepo;
+import com.fourmuchachos.gifmycrypto.User.Repo.UserRepo;
 import org.slf4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;

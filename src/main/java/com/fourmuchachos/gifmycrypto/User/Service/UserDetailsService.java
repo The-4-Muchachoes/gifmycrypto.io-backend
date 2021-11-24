@@ -1,4 +1,4 @@
-package com.fourmuchachos.gifmycrypto.Security.User.Service;
+package com.fourmuchachos.gifmycrypto.User.Service;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

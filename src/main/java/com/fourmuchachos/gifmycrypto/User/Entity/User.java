@@ -1,6 +1,6 @@
-package com.fourmuchachos.gifmycrypto.Security.User.Entity;
+package com.fourmuchachos.gifmycrypto.User.Entity;
 
-import com.fourmuchachos.gifmycrypto.Security.User.DTO.LoginRequest;
+import com.fourmuchachos.gifmycrypto.User.DTO.LoginRequest;
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.springframework.security.core.GrantedAuthority;

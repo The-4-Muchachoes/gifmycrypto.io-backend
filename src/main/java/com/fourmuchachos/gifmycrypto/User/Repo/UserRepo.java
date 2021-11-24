@@ -1,6 +1,6 @@
-package com.fourmuchachos.gifmycrypto.Security.User.Repo;
+package com.fourmuchachos.gifmycrypto.User.Repo;
 
-import com.fourmuchachos.gifmycrypto.Security.User.Entity.User;
+import com.fourmuchachos.gifmycrypto.User.Entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
