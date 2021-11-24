@@ -79,12 +79,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http = http
                 .exceptionHandling()
                 .authenticationEntryPoint(
-                        (request, response, ex) -> {
-                            response.sendError(
-                                    HttpServletResponse.SC_UNAUTHORIZED,
-                                    ex.getMessage()
-                            );
-                        }
+                        (request, response, ex) -> response.sendError(
+                                HttpServletResponse.SC_UNAUTHORIZED,
+                                ex.getMessage()
+                        )
                 )
                 .and();
 
@@ -93,16 +91,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 // Public endpoints
                 .antMatchers("/api/public/**").permitAll()
-                .antMatchers("/api/new_user").permitAll()
                 .antMatchers(AUTH_LIST).permitAll() // Swagger
 
                 // Restricted endpoints
                 .antMatchers("/api/user/**").hasAuthority("USER");
 
-
-               // Login Page
-//                .and()
-//                .formLogin().loginPage("/api/public/login");
 
         // Add JWT token filter
         http.addFilterBefore(

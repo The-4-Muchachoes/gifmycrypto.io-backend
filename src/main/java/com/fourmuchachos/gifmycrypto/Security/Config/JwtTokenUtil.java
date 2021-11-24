@@ -14,7 +14,7 @@ import static java.lang.String.format;
 public class JwtTokenUtil {
 
     private final String jwtSecret = "bigmuchachos1234";
-    private final String jwtIssuer = "muchachos.cinemaxx";
+    private final String jwtIssuer = "fourmuchachos.gifmycrypto";
 
     private final Logger logger;
 
