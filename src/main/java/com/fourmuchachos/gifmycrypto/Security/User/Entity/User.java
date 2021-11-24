@@ -3,13 +3,13 @@ package com.fourmuchachos.gifmycrypto.Security.User.Entity;
 import com.fourmuchachos.gifmycrypto.Security.User.DTO.LoginRequest;
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
+import java.util.Collection;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Getter
@@ -55,6 +55,11 @@ public class User implements UserDetails, Serializable {
     @Override
     public boolean isCredentialsNonExpired() {
         return enabled;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
     }
 
     @Override
