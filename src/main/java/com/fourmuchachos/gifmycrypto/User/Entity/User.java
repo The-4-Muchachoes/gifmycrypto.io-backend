@@ -1,15 +1,15 @@
 package com.fourmuchachos.gifmycrypto.User.Entity;
 
-import com.fourmuchachos.gifmycrypto.User.DTO.LoginRequest;
+import com.fourmuchachos.gifmycrypto.User.DTO.UserRequest;
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -17,49 +17,52 @@ import java.util.Objects;
 @ToString
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class User implements UserDetails, Serializable {
+public class User {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
-
-    private boolean enabled = true;
 
     @Column(unique = true)
     private String username;
 
     private String password;
 
-    private String authorities = "USER";
+    private boolean enabled = true;
+    private boolean tokenExpired = false;
+
+//    private String role = "USER";
+
+//    @ElementCollection(fetch = FetchType.EAGER)
+//    private Set<Role> roles = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(
+                    name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id", referencedColumnName = "id"))
+    private Collection<Role> roles;
 
     public User(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
-    public User(LoginRequest request) {
+    public User(UserRequest request) {
         this.username = request.getUsername();
         this.password = request.getPassword();
     }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return enabled;
+    public User(String username, String password, Set<Role> authority) {
+        this.username = username;
+        this.password = password;
+        this.roles = authority;
     }
 
-    @Override
-    public boolean isAccountNonLocked() {
-        return enabled;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return enabled;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+    public void addRole(Role role) {
+        roles.add(role);
     }
 
     @Override
@@ -74,6 +77,4 @@ public class User implements UserDetails, Serializable {
     public int hashCode() {
         return 0;
     }
-
-
 }

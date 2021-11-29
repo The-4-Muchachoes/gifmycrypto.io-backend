@@ -1,8 +1,8 @@
 package com.fourmuchachos.gifmycrypto.User.Controller;
 
 
-import com.fourmuchachos.gifmycrypto.Config.Security.JwtTokenUtil;
-import com.fourmuchachos.gifmycrypto.User.DTO.LoginRequest;
+import com.fourmuchachos.gifmycrypto.Config.Security.TokenProvider;
+import com.fourmuchachos.gifmycrypto.User.DTO.UserRequest;
 import com.fourmuchachos.gifmycrypto.User.DTO.UserResponse;
 import com.fourmuchachos.gifmycrypto.User.Entity.User;
 import com.fourmuchachos.gifmycrypto.User.Service.UserService;
@@ -31,21 +31,21 @@ public class UserController {
 
     private final UserService userService;
     private final AuthenticationManager authenticationManager;
-    private final JwtTokenUtil jwtTokenUtil;
+    private final TokenProvider tokenProvider;
     private final PasswordEncoder passwordEncoder;
 
     ModelMapper modelMapper = new ModelMapper();
 
     public UserController(UserService userService, AuthenticationManager authenticationManager,
-                          JwtTokenUtil jwtTokenUtil, PasswordEncoder passwordEncoder) {
+                          TokenProvider tokenProvider, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.authenticationManager = authenticationManager;
-        this.jwtTokenUtil = jwtTokenUtil;
+        this.tokenProvider = tokenProvider;
         this.passwordEncoder = passwordEncoder;
     }
 
     @PostMapping(path = "/signup")
-    private ResponseEntity<UserResponse> signup(@RequestBody LoginRequest request){
+    private ResponseEntity<UserResponse> signup(@RequestBody UserRequest request){
         User user = new User(request);
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         return ResponseEntity.ok()
@@ -53,23 +53,28 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<UserResponse> login(@RequestBody @Valid User userRequest) {
+    public ResponseEntity<UserResponse> login(@RequestBody @Valid UserRequest request) {
+
         try {
             Authentication authenticate = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            userRequest.getUsername(),
-                            userRequest.getPassword()));
+                            request.getUsername(),
+                            request.getPassword())
+            );
 
-            User user = (User) authenticate.getPrincipal();
+            UserResponse user = modelMapper.map(authenticate.getPrincipal(), UserResponse.class);
 
             return ResponseEntity.ok()
                     .header(
                             HttpHeaders.AUTHORIZATION,
-                            jwtTokenUtil.generateAccessToken(user))
-                    .body(modelMapper.map(user, UserResponse.class));
+                            tokenProvider.generateAccessToken(authenticate))
+                    .body(user);
 
         } catch (BadCredentialsException ex) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).build();
         }
     }
 
