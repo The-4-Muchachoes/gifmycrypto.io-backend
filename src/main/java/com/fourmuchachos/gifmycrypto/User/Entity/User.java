@@ -3,18 +3,15 @@ package com.fourmuchachos.gifmycrypto.User.Entity;
 import com.fourmuchachos.gifmycrypto.User.DTO.UserRequest;
 import lombok.*;
 import org.hibernate.Hibernate;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Getter
 @Setter
-@ToString
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class User {
@@ -31,11 +28,6 @@ public class User {
     private boolean enabled = true;
     private boolean tokenExpired = false;
 
-//    private String role = "USER";
-
-//    @ElementCollection(fetch = FetchType.EAGER)
-//    private Set<Role> roles = new HashSet<>();
-
     @ManyToMany
     @JoinTable(
             name = "users_roles",
@@ -43,7 +35,7 @@ public class User {
                     name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "id"))
-    private Collection<Role> roles;
+    private Set<Role> roles = new HashSet<>();
 
     public User(String username, String password) {
         this.username = username;

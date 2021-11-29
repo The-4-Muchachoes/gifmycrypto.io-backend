@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     @Override
     public User addUser(User user) {
-        user.setRoles(List.of(roleRepo.findByName(Role.USER)));
+        user.addRole(roleRepo.findByName(Role.USER));
         return userRepo.save(user);
     }
 

@@ -1,15 +1,14 @@
 package com.fourmuchachos.gifmycrypto.User.Entity;
 
 import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
 @Setter
-@ToString
 @AllArgsConstructor
 public class Role {
 
@@ -24,7 +23,7 @@ public class Role {
     private String name;
 
     @ManyToMany(mappedBy = "roles")
-    private Collection<User> users;
+    private Set<User> users = new HashSet<>();
 
     public Role() {}
 
