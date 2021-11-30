@@ -1,5 +1,7 @@
 package com.fourmuchachos.gifmycrypto.User.Service;
 
+import com.fourmuchachos.gifmycrypto.Config.Security.TokenProvider;
+import com.fourmuchachos.gifmycrypto.Crypto.DTO.CryptoDTO;
 import com.fourmuchachos.gifmycrypto.User.Entity.Role;
 import com.fourmuchachos.gifmycrypto.User.Entity.User;
 import com.fourmuchachos.gifmycrypto.User.Repo.RoleRepo;
@@ -20,10 +22,12 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     private final UserRepo userRepo;
     private final RoleRepo roleRepo;
+    private final TokenProvider tokenProvider;
 
-    public UserServiceImpl(UserRepo userRepo, RoleRepo roleRepo) {
+    public UserServiceImpl(UserRepo userRepo, RoleRepo roleRepo, TokenProvider tokenProvider) {
         this.userRepo = userRepo;
         this.roleRepo = roleRepo;
+        this.tokenProvider = tokenProvider;
     }
 
     @Override
@@ -32,6 +36,16 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         return userRepo.save(user);
     }
 
+    @Override
+    public User getAuthenticatedUser(String jwtToken) {
+        String bearer = "Bearer ";
+        if (jwtToken.startsWith(bearer))
+            jwtToken = jwtToken.replace(bearer, "");
+
+        String username = tokenProvider.getUsernameFromToken(jwtToken);
+        return userRepo.findByUsername(username).orElseThrow(() ->
+                new UsernameNotFoundException("User not found"));
+    }
 
     @Override
     @Transactional

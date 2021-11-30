@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class DataSetup implements CommandLineRunner {
 
-    private RoleRepo roleRepo;
+    private final RoleRepo roleRepo;
 
     public DataSetup(RoleRepo roleRepo) {
         this.roleRepo = roleRepo;
@@ -21,5 +21,6 @@ public class DataSetup implements CommandLineRunner {
 
         roleRepo.save(user);
         roleRepo.save(admin);
+
     }
 }

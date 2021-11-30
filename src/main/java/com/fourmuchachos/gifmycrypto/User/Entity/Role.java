@@ -1,5 +1,6 @@
 package com.fourmuchachos.gifmycrypto.User.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,12 +18,14 @@ public class Role {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @JsonIgnore
     private Integer id;
 
     @Column(unique = true)
     private String name;
 
     @ManyToMany(mappedBy = "roles")
+    @JsonIgnore
     private Set<User> users = new HashSet<>();
 
     public Role() {}

@@ -4,4 +4,5 @@ import com.fourmuchachos.gifmycrypto.User.Entity.User;
 
 public interface UserService {
     User addUser(User user);
+    User getAuthenticatedUser(String jwtToken);
 }
