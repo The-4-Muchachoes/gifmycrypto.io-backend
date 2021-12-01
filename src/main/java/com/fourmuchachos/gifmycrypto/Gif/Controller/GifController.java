@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "/api/gif", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/api/public/gif", produces = MediaType.APPLICATION_JSON_VALUE)
 @Api(value = "Gifs")
 public class GifController {
 
@@ -24,7 +24,7 @@ public class GifController {
 
     @GetMapping(path = "/{performance}")
     GifDTO getGifByPerformance(@PathVariable int performance) {
-        return modelMapper.map(gifService.getGifByPerformance(performance), GifDTO.class);
+        return modelMapper.map(gifService.getRandomGifByPerformance(performance), GifDTO.class);
     }
 
 
