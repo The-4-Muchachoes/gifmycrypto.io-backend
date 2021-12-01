@@ -5,5 +5,5 @@ import com.fourmuchachos.gifmycrypto.Gif.Entity.Gif;
 
 
 public interface GifService {
-    Gif getGifByPerformance(int performance);
+    Gif getRandomGifByPerformance(int performance);
 }
