@@ -12,7 +12,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class GifDTO {
-   int id;
-   int performance;
-   String gifURL;
+
+   private Integer performance;
+   private String gifURL;
+   private String description;
+
 }
