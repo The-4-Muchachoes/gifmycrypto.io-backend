@@ -26,6 +26,16 @@ public class PortfolioController {
         this.userService = userService;
     }
 
+    @GetMapping
+    @ApiOperation(value = "Gets the authenticated user's portfolio")
+    private ResponseEntity<Set<CryptoDTO>> getPortfolio(@RequestHeader("Authorization") String token) {
+        User user = userService.getAuthenticatedUser(token);
+        return new ResponseEntity<>(
+                user.getPortfolioAsDTOs(),
+                HttpStatus.OK
+        );
+    }
+
     @PostMapping(path = "/add")
     @ApiOperation(value = "Add Crypto to Portfolio")
     private ResponseEntity<Set<CryptoDTO>> addCryptoToPortfolio(
@@ -37,6 +47,20 @@ public class PortfolioController {
         return new ResponseEntity<>(
                 portfolioService.addCryptoToPortfolio(user, crypto),
                 HttpStatus.CREATED
+        );
+    }
+
+    @PutMapping(path = "/remove/{id}")
+    @ApiOperation(value = "Remove Crypto from Portfolio")
+    private ResponseEntity<Set<CryptoDTO>> removeCryptoFromPortfolio(
+            @RequestHeader("Authorization") String token,
+            @PathVariable(name = "id") String cryptoId) {
+
+        User user = userService.getAuthenticatedUser(token);
+
+        return new ResponseEntity<>(
+                portfolioService.removeCryptoFromPortfolio(user, cryptoId),
+                HttpStatus.OK
         );
     }
 }
