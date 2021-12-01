@@ -23,10 +23,10 @@ public class Gif {
     @Column(nullable = false)
     private Integer performance;
 
-    private String description;
-
     @Column
     String gifURL;
+
+    private String description;
 
     @Override
     public boolean equals(Object o) {
