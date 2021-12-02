@@ -23,7 +23,7 @@ public class GifController {
     GifService gifService;
 
     @GetMapping(path = "/{performance}")
-    GifDTO getGifByPerformance(@PathVariable int performance) {
+    GifDTO getRandomGifByPerformance(@PathVariable int performance) {
         return modelMapper.map(gifService.getRandomGifByPerformance(performance), GifDTO.class);
     }
 
