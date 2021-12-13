@@ -7,6 +7,7 @@ import com.fourmuchachos.gifmycrypto.User.Entity.User;
 import com.fourmuchachos.gifmycrypto.User.Repo.RoleRepo;
 import com.fourmuchachos.gifmycrypto.User.Repo.UserRepo;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
 
@@ -32,6 +34,8 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     @Override
     public User addUser(User user) {
+        if (userRepo.existsByUsername(user.getUsername()))
+            throw new ResponseStatusException(HttpStatus.FOUND, "Username already taken");
         user.addRole(roleRepo.findByName(Role.USER));
         return userRepo.save(user);
     }

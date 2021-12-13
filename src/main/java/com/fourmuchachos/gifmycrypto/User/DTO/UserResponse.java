@@ -15,4 +15,5 @@ public class UserResponse {
     private String username;
     private Set<Role> roles;
     private Set<Crypto> portfolio;
+    private String accessToken;
 }

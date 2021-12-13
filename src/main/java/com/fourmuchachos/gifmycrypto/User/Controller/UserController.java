@@ -48,8 +48,9 @@ public class UserController {
     private ResponseEntity<UserResponse> signup(@RequestBody UserRequest request){
         User user = new User(request);
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-        return ResponseEntity.ok()
-                .body(modelMapper.map(userService.addUser(user), UserResponse.class));
+        userService.addUser(user);
+
+        return login(request);
     }
 
     @PostMapping("/login")
@@ -62,12 +63,12 @@ public class UserController {
                             request.getPassword())
             );
 
+            String token = tokenProvider.generateAccessToken(authenticate);
             UserResponse user = modelMapper.map(authenticate.getPrincipal(), UserResponse.class);
+            user.setAccessToken(token);
 
             return ResponseEntity.ok()
-                    .header(
-                            HttpHeaders.AUTHORIZATION,
-                            tokenProvider.generateAccessToken(authenticate))
+                    .header(HttpHeaders.AUTHORIZATION, token)
                     .body(user);
 
         } catch (BadCredentialsException ex) {
