@@ -16,8 +16,12 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
@@ -95,6 +99,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        expressionHandler.setRoleHierarchy(roleHierarchy());
 //        return expressionHandler;
 //    }
+
+    @Bean
+    public CorsFilter corsFilter() {
+        UrlBasedCorsConfigurationSource source =
+                new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.setAllowedOriginPatterns(List.of("*"));
+        config.addAllowedHeader("*");
+        config.addAllowedHeader("Authorization");
+        config.addAllowedMethod("*");
+        config.setMaxAge(3600L); //1 hour
+        source.registerCorsConfiguration("/**", config);
+        return new CorsFilter(source);
+    }
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder(){
